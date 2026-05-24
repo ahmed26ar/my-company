@@ -7,6 +7,1078 @@
     <style>
         :root {
             --bg: #0a0a0a;
+            --bg2: #111;
+            --bg3: #1a1a1a;
+            --card: #141414;
+            --text: #f0f0f0;
+            --text2: #b0b0b0;
+            --accent: #00b4d8;
+            --accent2: #0096c7;
+            --accent-glow: rgba(0, 180, 216, 0.3);
+            --border: #2a2a2a;
+            --gold: #c9a84c;
+            --gradient: linear-gradient(135deg, #00b4d8, #0077b6);
+            --shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+            --glass: rgba(20, 20, 20, 0.85);
+            --ticker-bg: #0d0d0d;
+            --input-bg: #1a1a1a;
+            --input-border: #333;
+            --danger: #e63946;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --topbar-bg: #000;
+            --topbar-text: #ccc;
+            --topbar-btn-bg: #1a1a1a;
+            --topbar-btn-border: #333;
+            --topbar-btn-hover: var(--accent);
+        }
+
+        [data-theme="light"] {
+            --bg: #f5f5f5;
+            --bg2: #fff;
+            --bg3: #e8e8e8;
+            --card: #fff;
+            --text: #1a1a1a;
+            --text2: #555;
+            --accent: #0077b6;
+            --accent2: #0096c7;
+            --accent-glow: rgba(0, 119, 182, 0.2);
+            --border: #ddd;
+            --gold: #b8941f;
+            --gradient: linear-gradient(135deg, #0077b6, #00b4d8);
+            --shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+            --glass: rgba(255, 255, 255, 0.9);
+            --ticker-bg: #eaeaea;
+            --input-bg: #fff;
+            --input-border: #ccc;
+            --topbar-bg: #e0e0e0;
+            --topbar-text: #333;
+            --topbar-btn-bg: #fff;
+            --topbar-btn-border: #ccc;
+            --topbar-btn-hover: var(--accent);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Cairo', 'Tajawal', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: all 0.4s ease;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+        ::-webkit-scrollbar{width:6px}
+        ::-webkit-scrollbar-track{background:var(--bg)}
+        ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:10px}
+
+        /* ========== تحسين الشريط العلوي ========== */
+        .top-bar {
+            background: var(--topbar-bg);
+            color: var(--topbar-text);
+            font-size: 0.78rem;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: background 0.4s, color 0.4s;
+            z-index: 1001;
+        }
+        .top-bar .info-text {
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+        .top-bar a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .top-bar .controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .top-bar button {
+            background: var(--topbar-btn-bg);
+            border: 1px solid var(--topbar-btn-border);
+            color: var(--topbar-text);
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+            backdrop-filter: blur(5px);
+        }
+        .top-bar button:hover {
+            background: var(--topbar-btn-hover);
+            color: #000;
+            border-color: var(--topbar-btn-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+        .top-bar .telegram-link {
+            background: #0088cc;
+            color: #fff !important;
+            border-color: #0088cc;
+            font-weight: 700;
+        }
+        .top-bar .telegram-link:hover {
+            background: #006699;
+            border-color: #006699;
+            color: #fff;
+        }
+
+        /* شعار */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--text);
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            box-shadow: 0 0 20px var(--accent-glow);
+            transition: transform 0.3s;
+        }
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: filter 0.4s;
+        }
+        [data-theme="dark"] .logo-icon img {
+            filter: invert(1) brightness(1.2);
+        }
+        [data-theme="light"] .logo-icon img {
+            filter: invert(0);
+        }
+        .logo-icon:hover {
+            transform: scale(1.05);
+        }
+
+        /* ... (باقي التنسيقات مشابهة مع تحسينات طفيفة) ... */
+        /* نضيف باقي الـCSS الموجود سابقاً مع تحسينات */
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text2);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            padding: 6px 0;
+            position: relative;
+            white-space: nowrap;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        .nav-links a:hover::after {width:100%}
+        .btn-telegram {
+            background: #0088cc;
+            color: #fff !important;
+            padding: 9px 20px !important;
+            border-radius: 25px;
+            font-weight: 700 !important;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            text-decoration: none;
+            white-space: nowrap;
+            box-shadow: 0 4px 20px rgba(0,136,204,0.35);
+        }
+        .btn-telegram:hover {
+            background: #006699;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(0,136,204,0.5);
+        }
+
+        /* Ticker */
+        .ticker-wrap {
+            background: var(--ticker-bg);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+            position: relative;
+            height: 42px;
+            display: flex;
+            align-items: center;
+        }
+        .ticker-label {
+            background: var(--accent);
+            color: #000;
+            font-weight: 700;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            z-index: 2;
+        }
+        .ticker-track {
+            display: flex;
+            animation: tickerScroll 60s linear infinite;
+            white-space: nowrap;
+        }
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0 18px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .ticker-item .pair{font-weight:700;color:var(--text)}
+        .ticker-item .price{font-weight:600;color:var(--accent);font-family:monospace}
+        .ticker-item .change{font-size:0.7rem;font-weight:600}
+        .up{color:#2ecc71}.down{color:#e63946}
+        @keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+        /* Hero */
+        .hero {
+            padding: 70px 30px;
+            text-align: center;
+            position: relative;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .hero p {
+            color: var(--text2);
+            font-size: 1.15rem;
+            max-width: 650px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        .hero-btns {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+        .btn-primary {
+            background: var(--gradient);
+            color: #fff;
+            padding: 13px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 6px 25px var(--accent-glow);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px var(--accent-glow);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 13px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn-outline:hover {
+            background: var(--accent);
+            color: #000;
+        }
+
+        /* Sections */
+        section {
+            padding: 60px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .section-sub {
+            text-align: center;
+            color: var(--text2);
+            margin-bottom: 45px;
+            font-size: 1rem;
+        }
+        .accent-text{color:var(--accent)}
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px 24px;
+            transition: 0.3s;
+            box-shadow: var(--shadow);
+            cursor: default;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 16px 50px var(--accent-glow);
+        }
+        .card-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 16px;
+            color: #fff;
+            box-shadow: 0 4px 18px var(--accent-glow);
+        }
+        .card h3{font-size:1.2rem;margin-bottom:8px;font-weight:700}
+        .card p{color:var(--text2);font-size:0.9rem}
+
+        /* Tools */
+        .tools-section {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 60px 30px;
+        }
+        .tools-container{max-width:1200px;margin:0 auto}
+        .tool-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 22px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+        }
+        .tool-card:hover{border-color:var(--accent)}
+        .tool-card h3{font-size:1.15rem;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:var(--accent)}
+        .tool-card label{display:block;font-size:0.85rem;color:var(--text2);margin-bottom:4px;font-weight:500}
+        .tool-card input,.tool-card select{
+            width:100%;
+            padding:10px 14px;
+            border-radius:10px;
+            border:1px solid var(--input-border);
+            background:var(--input-bg);
+            color:var(--text);
+            font-size:0.9rem;
+            margin-bottom:12px;
+            transition:0.3s;
+            font-family:inherit;
+        }
+        .tool-card input:focus,.tool-card select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+        .tool-card .result{
+            background:var(--bg3);
+            padding:14px 18px;
+            border-radius:10px;
+            font-weight:700;
+            color:var(--accent);
+            font-size:1.1rem;
+            margin-top:8px;
+            text-align:center;
+            min-height:48px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border:1px dashed var(--accent);
+            transition:0.3s;
+        }
+        .tool-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+        @media(max-width:600px){.tool-row{grid-template-columns:1fr}}
+        .btn-calc{
+            width:100%;
+            padding:11px;
+            border-radius:25px;
+            background:var(--gradient);
+            color:#fff;
+            border:none;
+            font-weight:700;
+            cursor:pointer;
+            font-size:0.95rem;
+            transition:0.3s;
+            letter-spacing:0.3px;
+        }
+        .btn-calc:hover{opacity:0.9;transform:translateY(-1px);box-shadow:0 8px 20px var(--accent-glow)}
+
+        /* Features strip */
+        .features-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 40px 30px;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .feature-item{text-align:center;flex:1 1 150px;max-width:200px}
+        .feature-num{font-size:2.5rem;font-weight:900;color:var(--accent)}
+        .feature-label{font-size:0.85rem;color:var(--text2)}
+
+        /* Footer */
+        footer{
+            background: #000;
+            color:#999;
+            text-align:center;
+            padding:35px 20px;
+            font-size:0.85rem;
+            border-top:1px solid #1a1a1a;
+        }
+        footer a{color:var(--accent);text-decoration:none;font-weight:600}
+        footer .footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+        [data-theme="light"] footer{background:#ddd;color:#555;border-top:1px solid #ccc}
+
+        /* Toast notifications */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--card);
+            color: var(--text);
+            border: 1px solid var(--accent);
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 9999;
+            animation: toastIn 0.4s ease, toastOut 0.4s ease 2.5s forwards;
+            backdrop-filter: blur(15px);
+            white-space: nowrap;
+        }
+        @keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+        @keyframes toastOut{from{opacity:1}to{opacity:0;transform:translateX(-50%) translateY(-10px)}}
+
+        /* RTL / LTR */
+        [dir="ltr"] body{font-family:'Segoe UI',sans-serif}
+        [dir="rtl"] body{font-family:'Cairo','Tajawal','Segoe UI',sans-serif}
+        @media(max-width:768px){
+            .hero h1{font-size:2rem}
+            .navbar{padding:10px 16px}
+            .nav-links{gap:10px;font-size:0.78rem}
+            section{padding:40px 16px}
+            .section-title{font-size:1.6rem}
+            .cards-grid{grid-template-columns:1fr}
+        }
+        @media(max-width:480px){
+            .hero h1{font-size:1.5rem}
+            .ticker-item{font-size:0.7rem;padding:0 10px}
+            .top-bar{font-size:0.68rem;padding:6px 12px}
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== TOP BAR (محسّن) ========== -->
+    <div class="top-bar">
+        <span class="info-text" data-lang="topbar-text">📊 أسواق المال مباشر | تنبيهات ذكاء اصطناعي | إشارات تداول احترافية</span>
+        <div class="controls">
+            <a href="https://t.me/srfx0" target="_blank" rel="noopener" class="telegram-link" style="padding:6px 14px;border-radius:20px;font-weight:700;text-decoration:none;">📱 @srfx0</a>
+            <button onclick="toggleLanguage()" title="تبديل اللغة">🌐 <span data-lang="lang-btn">EN / AR</span></button>
+            <button onclick="toggleTheme()" title="تغيير المظهر">🌓 <span data-lang="theme-btn">ليل / نهار</span></button>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <div class="logo-icon">
+                <!-- استبدل الرابط برابط الصورة المباشر من imgur -->
+                <img src="https://i.imgur.com/Q0Uh4Rk.png" alt="SRFX Logo">
+            </div>
+            <span>SRFX</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#home" data-lang="nav-home">الرئيسية</a></li>
+            <li><a href="#services" data-lang="nav-services">الخدمات</a></li>
+            <li><a href="#tools" data-lang="nav-tools">أدوات الذكاء الاصطناعي</a></li>
+            <li><a href="#about" data-lang="nav-about">من نحن</a></li>
+            <li><a href="https://t.me/srfx0" target="_blank" rel="noopener" class="btn-telegram">📱 <span data-lang="nav-telegram">انضم للتليجرام</span></a></li>
+        </ul>
+    </nav>
+
+    <!-- TICKER -->
+    <div class="ticker-wrap">
+        <span class="ticker-label">📈 <span data-lang="ticker-label">مباشر</span></span>
+        <div class="ticker-track" id="ticker-track"></div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <h1 data-lang="hero-title">تداول الفوركس بذكاء مع SRFX</h1>
+        <p data-lang="hero-desc">إشارات تداول احترافية، كورسات تعليمية، وأدوات ذكاء اصطناعي متطورة تساعدك على اتخاذ القرارات الصحيحة في الأسواق المالية.</p>
+        <div class="hero-btns">
+            <a href="#tools" class="btn-primary">🔧 <span data-lang="hero-btn1">جرب الأدوات الذكية</span></a>
+            <a href="https://t.me/srfx0" target="_blank" rel="noopener" class="btn-outline">📱 <span data-lang="hero-btn2">انضم للقناة</span></a>
+        </div>
+    </section>
+
+    <!-- FEATURES STRIP -->
+    <div class="features-strip">
+        <div class="feature-item"><div class="feature-num" data-count="5000">0</div><div class="feature-label" data-lang="feat1">متداول نشط</div></div>
+        <div class="feature-item"><div class="feature-num" data-count="98">0</div><div class="feature-label" data-lang="feat2">% دقة الإشارات</div></div>
+        <div class="feature-item"><div class="feature-num" data-count="24">0</div><div class="feature-label" data-lang="feat3">ساعة دعم متواصل</div></div>
+        <div class="feature-item"><div class="feature-num" data-count="150">0</div><div class="feature-label" data-lang="feat4">كورس تعليمي</div></div>
+    </div>
+
+    <!-- SERVICES -->
+    <section id="services">
+        <h2 class="section-title">🚀 <span class="accent-text" data-lang="services-title">خدماتنا</span> المتميزة</h2>
+        <p class="section-sub" data-lang="services-sub">نقدم حلولاً متكاملة للمتداولين من جميع المستويات</p>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">📡</div>
+                <h3 data-lang="srv1-title">إشارات تداول دقيقة</h3>
+                <p data-lang="srv1-desc">إشارات فوركس مباشرة مبنية على تحليل فني وأساسي مع نسبة نجاح عالية تصل إلى 98%، تشمل نقاط الدخول والخروج وإدارة المخاطر.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📚</div>
+                <h3 data-lang="srv2-title">كورسات تعليمية شاملة</h3>
+                <p data-lang="srv2-desc">من الصفر إلى الاحتراف، كورسات تغطي التحليل الفني والأساسي وإدارة رأس المال وعلم النفس في التداول مع شهادات معتمدة.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🤖</div>
+                <h3 data-lang="srv3-title">أدوات ذكاء اصطناعي</h3>
+                <p data-lang="srv3-desc">أدوات تحليل ذكية تشمل حساب حجم الصفقة، تحليل المخاطر، حاسبة الأرباح المركبة، وتحليل اتجاهات السوق بشكل احترافي.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💬</div>
+                <h3 data-lang="srv4-title">دعم وتحليل مباشر</h3>
+                <p data-lang="srv4-desc">فريق دعم متواجد على مدار الساعة عبر قناة التليجرام للإجابة على استفساراتكم وتقديم التحليلات اليومية للأسواق.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOOLS -->
+    <div class="tools-section" id="tools">
+        <div class="tools-container">
+            <h2 class="section-title" style="text-align:center;">🧠 <span class="accent-text" data-lang="tools-title">أدوات الذكاء الاصطناعي</span></h2>
+            <p class="section-sub" data-lang="tools-sub">أدوات احترافية حقيقية تعمل بكامل طاقتها لمساعدتك في التداول</p>
+
+            <div class="tool-card">
+                <h3>📐 <span data-lang="tool1-title">حاسبة حجم الصفقة الذكية</span></h3>
+                <div class="tool-row">
+                    <div><label data-lang="tool1-balance">رصيد الحساب ($)</label><input type="number" id="pos-balance" value="10000"></div>
+                    <div><label data-lang="tool1-risk">نسبة المخاطرة (%)</label><input type="number" id="pos-risk" value="2"></div>
+                </div>
+                <div class="tool-row">
+                    <div><label data-lang="tool1-entry">سعر الدخول</label><input type="number" id="pos-entry" value="1.0850"></div>
+                    <div><label data-lang="tool1-sl">سعر إيقاف الخسارة</label><input type="number" id="pos-sl" value="1.0800"></div>
+                </div>
+                <button class="btn-calc" onclick="calcPositionSize()">📊 <span data-lang="tool1-calc">احسب حجم الصفقة</span></button>
+                <div class="result" id="pos-result" data-lang="tool1-result">النتيجة تظهر هنا...</div>
+            </div>
+
+            <div class="tool-card">
+                <h3>📈 <span data-lang="tool2-title">حاسبة الأرباح المركبة</span></h3>
+                <div class="tool-row">
+                    <div><label data-lang="tool2-capital">رأس المال الأولي ($)</label><input type="number" id="comp-capital" value="5000"></div>
+                    <div><label data-lang="tool2-monthly">العائد الشهري (%)</label><input type="number" id="comp-monthly" value="5"></div>
+                </div>
+                <div class="tool-row">
+                    <div><label data-lang="tool2-months">عدد الأشهر</label><input type="number" id="comp-months" value="12"></div>
+                    <div><label data-lang="tool2-reinvest">إعادة استثمار الأرباح</label><select id="comp-reinvest"><option value="yes" data-lang="opt-yes">نعم</option><option value="no" data-lang="opt-no">لا (سحب الأرباح)</option></select></div>
+                </div>
+                <button class="btn-calc" onclick="calcCompound()">💰 <span data-lang="tool2-calc">احسب الأرباح المركبة</span></button>
+                <div class="result" id="comp-result" data-lang="tool2-result">النتيجة تظهر هنا...</div>
+            </div>
+
+            <div class="tool-card">
+                <h3>⚖️ <span data-lang="tool3-title">محلل المخاطر والعوائد</span></h3>
+                <div class="tool-row">
+                    <div><label data-lang="tool3-entry">سعر الدخول</label><input type="number" id="rr-entry" value="1.2000"></div>
+                    <div><label data-lang="tool3-sl">إيقاف الخسارة</label><input type="number" id="rr-sl" value="1.1950"></div>
+                </div>
+                <div class="tool-row">
+                    <div><label data-lang="tool3-tp">هدف الربح</label><input type="number" id="rr-tp" value="1.2150"></div>
+                    <div><label data-lang="tool3-lot">حجم العقد (لوت)</label><input type="number" id="rr-lot" value="1.0"></div>
+                </div>
+                <button class="btn-calc" onclick="calcRiskReward()">📉 <span data-lang="tool3-calc">حلل الصفقة</span></button>
+                <div class="result" id="rr-result" data-lang="tool3-result">النتيجة تظهر هنا...</div>
+            </div>
+
+            <div class="tool-card">
+                <h3>💎 <span data-lang="tool4-title">حاسبة قيمة النقطة (Pip)</span></h3>
+                <div class="tool-row">
+                    <div><label data-lang="tool4-pair">زوج العملات</label><select id="pip-pair"><option>EURUSD</option><option>GBPUSD</option><option>USDJPY</option><option>AUDUSD</option><option>USDCAD</option><option>USDCHF</option><option>NZDUSD</option><option>EURGBP</option><option>GBPJPY</option><option>EURJPY</option></select></div>
+                    <div><label data-lang="tool4-lot">حجم العقد (لوت)</label><input type="number" id="pip-lot" value="1.0"></div>
+                </div>
+                <button class="btn-calc" onclick="calcPipValue()">💡 <span data-lang="tool4-calc">احسب قيمة النقطة</span></button>
+                <div class="result" id="pip-result" data-lang="tool4-result">النتيجة تظهر هنا...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <h2 class="section-title">🌍 <span class="accent-text" data-lang="about-title">من نحن</span></h2>
+        <p class="section-sub" data-lang="about-desc">SRFX هي شركة رائدة في مجال تداول الفوركس وتقديم الحلول الذكية للمتداولين حول العالم. نجمع بين الخبرة البشرية وقوة الذكاء الاصطناعي لنوفر لكم أفضل إشارات التداول والكورسات التعليمية والأدوات المتطورة. هدفنا تمكين المتداولين من تحقيق أرباح مستدامة من خلال المعرفة والتكنولوجيا.</p>
+        <div style="text-align:center;margin-top:25px;">
+            <a href="https://t.me/srfx0" target="_blank" rel="noopener" class="btn-telegram" style="font-size:1.1rem;padding:14px 30px;">📱 <span data-lang="about-join">انضم إلى قناتنا على التليجرام @srfx0</span></a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#home" data-lang="footer-home">الرئيسية</a>
+            <a href="#services" data-lang="footer-services">الخدمات</a>
+            <a href="#tools" data-lang="footer-tools">الأدوات</a>
+            <a href="https://t.me/srfx0" target="_blank" rel="noopener">Telegram</a>
+        </div>
+        <p>© 2026 <strong>SRFX</strong>. <span data-lang="footer-rights">جميع الحقوق محفوظة. صُمم بأحدث تقنيات الذكاء الاصطناعي.</span></p>
+        <p style="margin-top:6px;">📧 <span data-lang="footer-contact">للتواصل عبر التليجرام:</span> <a href="https://t.me/srfx0" target="_blank" rel="noopener">@srfx0</a></p>
+    </footer>
+
+    <script>
+        // ============ TRANSLATIONS ============
+        const translations = {
+            ar: {
+                'topbar-text': 'أسواق المال مباشر | تنبيهات ذكاء اصطناعي | إشارات تداول احترافية',
+                'lang-btn': 'EN / AR',
+                'theme-btn': 'ليل / نهار',
+                'nav-home': 'الرئيسية',
+                'nav-services': 'الخدمات',
+                'nav-tools': 'أدوات الذكاء الاصطناعي',
+                'nav-about': 'من نحن',
+                'nav-telegram': 'انضم للتليجرام',
+                'ticker-label': 'مباشر',
+                'hero-title': 'تداول الفوركس بذكاء مع SRFX',
+                'hero-desc': 'إشارات تداول احترافية، كورسات تعليمية، وأدوات ذكاء اصطناعي متطورة تساعدك على اتخاذ القرارات الصحيحة في الأسواق المالية.',
+                'hero-btn1': 'جرب الأدوات الذكية',
+                'hero-btn2': 'انضم للقناة',
+                'feat1': 'متداول نشط',
+                'feat2': '% دقة الإشارات',
+                'feat3': 'ساعة دعم متواصل',
+                'feat4': 'كورس تعليمي',
+                'services-title': 'خدماتنا المتميزة',
+                'services-sub': 'نقدم حلولاً متكاملة للمتداولين من جميع المستويات',
+                'srv1-title': 'إشارات تداول دقيقة',
+                'srv1-desc': 'إشارات فوركس مباشرة مبنية على تحليل فني وأساسي مع نسبة نجاح عالية تصل إلى 98%، تشمل نقاط الدخول والخروج وإدارة المخاطر.',
+                'srv2-title': 'كورسات تعليمية شاملة',
+                'srv2-desc': 'من الصفر إلى الاحتراف، كورسات تغطي التحليل الفني والأساسي وإدارة رأس المال وعلم النفس في التداول مع شهادات معتمدة.',
+                'srv3-title': 'أدوات ذكاء اصطناعي',
+                'srv3-desc': 'أدوات تحليل ذكية تشمل حساب حجم الصفقة، تحليل المخاطر، حاسبة الأرباح المركبة، وتحليل اتجاهات السوق بشكل احترافي.',
+                'srv4-title': 'دعم وتحليل مباشر',
+                'srv4-desc': 'فريق دعم متواجد على مدار الساعة عبر قناة التليجرام للإجابة على استفساراتكم وتقديم التحليلات اليومية للأسواق.',
+                'tools-title': 'أدوات الذكاء الاصطناعي',
+                'tools-sub': 'أدوات احترافية حقيقية تعمل بكامل طاقتها لمساعدتك في التداول',
+                'tool1-title': 'حاسبة حجم الصفقة الذكية',
+                'tool1-balance': 'رصيد الحساب ($)',
+                'tool1-risk': 'نسبة المخاطرة (%)',
+                'tool1-entry': 'سعر الدخول',
+                'tool1-sl': 'سعر إيقاف الخسارة',
+                'tool1-calc': 'احسب حجم الصفقة',
+                'tool1-result': 'النتيجة تظهر هنا...',
+                'tool2-title': 'حاسبة الأرباح المركبة',
+                'tool2-capital': 'رأس المال الأولي ($)',
+                'tool2-monthly': 'العائد الشهري (%)',
+                'tool2-months': 'عدد الأشهر',
+                'tool2-reinvest': 'إعادة استثمار الأرباح',
+                'opt-yes': 'نعم',
+                'opt-no': 'لا (سحب الأرباح)',
+                'tool2-calc': 'احسب الأرباح المركبة',
+                'tool2-result': 'النتيجة تظهر هنا...',
+                'tool3-title': 'محلل المخاطر والعوائد',
+                'tool3-entry': 'سعر الدخول',
+                'tool3-sl': 'إيقاف الخسارة',
+                'tool3-tp': 'هدف الربح',
+                'tool3-lot': 'حجم العقد (لوت)',
+                'tool3-calc': 'حلل الصفقة',
+                'tool3-result': 'النتيجة تظهر هنا...',
+                'tool4-title': 'حاسبة قيمة النقطة (Pip)',
+                'tool4-pair': 'زوج العملات',
+                'tool4-lot': 'حجم العقد (لوت)',
+                'tool4-calc': 'احسب قيمة النقطة',
+                'tool4-result': 'النتيجة تظهر هنا...',
+                'about-title': 'من نحن',
+                'about-desc': 'SRFX هي شركة رائدة في مجال تداول الفوركس وتقديم الحلول الذكية للمتداولين حول العالم. نجمع بين الخبرة البشرية وقوة الذكاء الاصطناعي لنوفر لكم أفضل إشارات التداول والكورسات التعليمية والأدوات المتطورة. هدفنا تمكين المتداولين من تحقيق أرباح مستدامة من خلال المعرفة والتكنولوجيا.',
+                'about-join': 'انضم إلى قناتنا على التليجرام @srfx0',
+                'footer-home': 'الرئيسية',
+                'footer-services': 'الخدمات',
+                'footer-tools': 'الأدوات',
+                'footer-rights': 'جميع الحقوق محفوظة. صُمم بأحدث تقنيات الذكاء الاصطناعي.',
+                'footer-contact': 'للتواصل عبر التليجرام:',
+            },
+            en: {
+                'topbar-text': 'Live Markets | AI Alerts | Professional Trading Signals',
+                'lang-btn': 'EN / AR',
+                'theme-btn': 'Dark / Light',
+                'nav-home': 'Home',
+                'nav-services': 'Services',
+                'nav-tools': 'AI Tools',
+                'nav-about': 'About Us',
+                'nav-telegram': 'Join Telegram',
+                'ticker-label': 'LIVE',
+                'hero-title': 'Trade Forex Smartly with SRFX',
+                'hero-desc': 'Professional trading signals, educational courses, and advanced AI tools that help you make the right decisions in financial markets.',
+                'hero-btn1': 'Try Smart Tools',
+                'hero-btn2': 'Join Channel',
+                'feat1': 'Active Traders',
+                'feat2': '% Signal Accuracy',
+                'feat3': 'Hour Support',
+                'feat4': 'Courses',
+                'services-title': 'Our Premium Services',
+                'services-sub': 'Comprehensive solutions for traders of all levels',
+                'srv1-title': 'Accurate Trading Signals',
+                'srv1-desc': 'Live forex signals based on technical and fundamental analysis with up to 98% success rate, including entry/exit points and risk management.',
+                'srv2-title': 'Comprehensive Courses',
+                'srv2-desc': 'From zero to professional, courses covering technical & fundamental analysis, capital management, and trading psychology with certificates.',
+                'srv3-title': 'AI-Powered Tools',
+                'srv3-desc': 'Smart analysis tools including position size calculator, risk analyzer, compound interest calculator, and professional market trend analysis.',
+                'srv4-title': 'Live Support & Analysis',
+                'srv4-desc': '24/7 support team available via Telegram channel to answer your queries and provide daily market analysis.',
+                'tools-title': 'AI Tools',
+                'tools-sub': 'Real professional tools functioning at full capacity to help you trade',
+                'tool1-title': 'Smart Position Size Calculator',
+                'tool1-balance': 'Account Balance ($)',
+                'tool1-risk': 'Risk Percentage (%)',
+                'tool1-entry': 'Entry Price',
+                'tool1-sl': 'Stop Loss Price',
+                'tool1-calc': 'Calculate Position Size',
+                'tool1-result': 'Result appears here...',
+                'tool2-title': 'Compound Interest Calculator',
+                'tool2-capital': 'Initial Capital ($)',
+                'tool2-monthly': 'Monthly Return (%)',
+                'tool2-months': 'Number of Months',
+                'tool2-reinvest': 'Reinvest Profits',
+                'opt-yes': 'Yes',
+                'opt-no': 'No (Withdraw Profits)',
+                'tool2-calc': 'Calculate Compound',
+                'tool2-result': 'Result appears here...',
+                'tool3-title': 'Risk/Reward Analyzer',
+                'tool3-entry': 'Entry Price',
+                'tool3-sl': 'Stop Loss',
+                'tool3-tp': 'Take Profit',
+                'tool3-lot': 'Lot Size',
+                'tool3-calc': 'Analyze Trade',
+                'tool3-result': 'Result appears here...',
+                'tool4-title': 'Pip Value Calculator',
+                'tool4-pair': 'Currency Pair',
+                'tool4-lot': 'Lot Size',
+                'tool4-calc': 'Calculate Pip Value',
+                'tool4-result': 'Result appears here...',
+                'about-title': 'About Us',
+                'about-desc': 'SRFX is a leading company in forex trading and smart solutions for traders worldwide. We combine human expertise with AI power to provide the best trading signals, educational courses, and advanced tools. Our goal is empowering traders to achieve sustainable profits through knowledge and technology.',
+                'about-join': 'Join Our Telegram Channel @srfx0',
+                'footer-home': 'Home',
+                'footer-services': 'Services',
+                'footer-tools': 'Tools',
+                'footer-rights': 'All rights reserved. Designed with cutting-edge AI technology.',
+                'footer-contact': 'Contact via Telegram:',
+            }
+        };
+
+        let currentLang = 'ar';
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            updateAllTranslations();
+            localStorage.setItem('srfrx_lang', currentLang);
+            showToast(currentLang === 'ar' ? 'تم تغيير اللغة إلى العربية' : 'Language switched to English');
+        }
+
+        function updateAllTranslations() {
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                const key = el.getAttribute('data-lang');
+                if (translations[currentLang] && translations[currentLang][key]) {
+                    el.textContent = translations[currentLang][key];
+                }
+            });
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('srfrx_theme', next);
+            showToast(next === 'dark' ? '🌙 الوضع الليلي مفعل' : '☀️ الوضع النهاري مفعل');
+        }
+
+        function showToast(msg) {
+            const existing = document.querySelector('.toast');
+            if (existing) existing.remove();
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        function initSettings() {
+            const savedLang = localStorage.getItem('srfrx_lang');
+            if (savedLang && (savedLang === 'ar' || savedLang === 'en')) {
+                currentLang = savedLang;
+            }
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            const savedTheme = localStorage.getItem('srfrx_theme');
+            if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+            updateAllTranslations();
+        }
+
+        // ============ LIVE TICKER ============
+        const forexPairs = [
+            { pair: 'EUR/USD', basePrice: 1.0850, decimals: 4 },
+            { pair: 'GBP/USD', basePrice: 1.2650, decimals: 4 },
+            { pair: 'USD/JPY', basePrice: 154.20, decimals: 2 },
+            { pair: 'AUD/USD', basePrice: 0.6520, decimals: 4 },
+            { pair: 'USD/CAD', basePrice: 1.3680, decimals: 4 },
+            { pair: 'USD/CHF', basePrice: 0.8820, decimals: 4 },
+            { pair: 'NZD/USD', basePrice: 0.5980, decimals: 4 },
+            { pair: 'EUR/GBP', basePrice: 0.8570, decimals: 4 },
+            { pair: 'GBP/JPY', basePrice: 195.00, decimals: 2 },
+            { pair: 'EUR/JPY', basePrice: 167.30, decimals: 2 },
+        ];
+        let pairStates = forexPairs.map(p => ({...p, currentPrice: p.basePrice, prevPrice: p.basePrice}));
+
+        function updateTicker() {
+            pairStates.forEach(state => {
+                const volatility = state.currentPrice * 0.0003;
+                state.prevPrice = state.currentPrice;
+                state.currentPrice += (Math.random() - 0.5) * volatility * 2;
+                if (state.currentPrice <= 0) state.currentPrice = state.prevPrice;
+            });
+            const tickerTrack = document.getElementById('ticker-track');
+            let html = '';
+            for (let dup = 0; dup < 2; dup++) {
+                pairStates.forEach(state => {
+                    const changePercent = ((state.currentPrice - state.basePrice) / state.basePrice) * 100;
+                    const isUp = state.currentPrice >= state.prevPrice;
+                    const arrow = isUp ? '▲' : '▼';
+                    const cls = isUp ? 'up' : 'down';
+                    html += `<span class="ticker-item"><span class="pair">${state.pair}</span> <span class="price">${state.currentPrice.toFixed(state.decimals)}</span> <span class="change ${cls}">${arrow} ${Math.abs(changePercent).toFixed(2)}%</span></span>`;
+                });
+            }
+            tickerTrack.innerHTML = html;
+        }
+        setInterval(updateTicker, 1500);
+        updateTicker();
+
+        // ============ COUNTERS ============
+        function animateCounters() {
+            document.querySelectorAll('.feature-num[data-count]').forEach(el => {
+                const target = parseInt(el.getAttribute('data-count'));
+                let current = 0;
+                const increment = target / 80;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        el.textContent = target.toLocaleString() + (target === 98 ? '%' : target === 24 ? '/7' : '+');
+                        clearInterval(timer);
+                    } else {
+                        el.textContent = Math.floor(current).toLocaleString() + (target === 98 ? '%' : target === 24 ? '/7' : '+');
+                    }
+                }, 20);
+            });
+        }
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                animateCounters();
+                observer.unobserve(entries[0].target);
+            }
+        }, {threshold: 0.5});
+        observer.observe(document.querySelector('.features-strip'));
+
+        // ============ TOOLS ============
+        function formatCurrency(num) { return num.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+        function showToolResult(elementId, html, color = 'var(--accent)') {
+            const el = document.getElementById(elementId);
+            el.innerHTML = html;
+            el.style.color = color;
+            // تأثير تفاعلي
+            el.style.transform = 'scale(1.02)';
+            setTimeout(() => el.style.transform = 'scale(1)', 200);
+        }
+
+        function calcPositionSize() {
+            const balance = parseFloat(document.getElementById('pos-balance').value) || 0;
+            const riskPct = parseFloat(document.getElementById('pos-risk').value) || 0;
+            const entry = parseFloat(document.getElementById('pos-entry').value) || 0;
+            const sl = parseFloat(document.getElementById('pos-sl').value) || 0;
+            if (balance <= 0 || riskPct <= 0 || entry <= 0 || sl <= 0 || entry === sl) {
+                showToolResult('pos-result', currentLang === 'ar' ? '⚠️ الرجاء إدخال قيم صحيحة' : '⚠️ Please enter valid values', 'var(--danger)');
+                return;
+            }
+            const riskAmount = balance * (riskPct / 100);
+            const pipDiff = Math.abs(entry - sl) / 0.0001;
+            const lotSize = riskAmount / (pipDiff * 10);
+            const text = currentLang === 'ar' ?
+                `📐 حجم الصفقة: <strong>${lotSize.toFixed(2)} لوت</strong> | المخاطرة: $${formatCurrency(riskAmount)} | الفارق: ${Math.round(pipDiff)} نقطة` :
+                `📐 Position Size: <strong>${lotSize.toFixed(2)} Lots</strong> | Risk: $${formatCurrency(riskAmount)} | Diff: ${Math.round(pipDiff)} pips`;
+            showToolResult('pos-result', text);
+            showToast(currentLang === 'ar' ? '✅ تم حساب حجم الصفقة' : '✅ Position size calculated');
+        }
+
+        function calcCompound() {
+            const capital = parseFloat(document.getElementById('comp-capital').value) || 0;
+            const monthly = parseFloat(document.getElementById('comp-monthly').value) || 0;
+            const months = parseInt(document.getElementById('comp-months').value) || 0;
+            const reinvest = document.getElementById('comp-reinvest').value === 'yes';
+            if (capital <= 0 || monthly <= 0 || months <= 0) {
+                showToolResult('comp-result', currentLang === 'ar' ? '⚠️ الرجاء إدخال قيم صحيحة' : '⚠️ Please enter valid values', 'var(--danger)');
+                return;
+            }
+            let finalCapital, totalProfit;
+            if (reinvest) {
+                finalCapital = capital * Math.pow(1 + monthly / 100, months);
+                totalProfit = finalCapital - capital;
+            } else {
+                totalProfit = capital * (monthly / 100) * months;
+                finalCapital = capital + totalProfit;
+            }
+            const text = currentLang === 'ar' ?
+                `💰 بعد ${months} شهر: <strong>$${formatCurrency(finalCapital)}</strong> | الربح: <strong>$${formatCurrency(totalProfit)}</strong>` :
+                `💰 After ${months} months: <strong>$${formatCurrency(finalCapital)}</strong> | Profit: <strong>$${formatCurrency(totalProfit)}</strong>`;
+            showToolResult('comp-result', text, 'var(--success)');
+            showToast(currentLang === 'ar' ? '📈 تم حساب الأرباح المركبة' : '📈 Compound calculated');
+        }
+
+        function calcRiskReward() {
+            const entry = parseFloat(document.getElementById('rr-entry').value) || 0;
+            const sl = parseFloat(document.getElementById('rr-sl').value) || 0;
+            const tp = parseFloat(document.getElementById('rr-tp').value) || 0;
+            const lot = parseFloat(document.getElementById('rr-lot').value) || 0;
+            if (entry <= 0 || sl <= 0 || tp <= 0 || lot <= 0 || entry === sl) {
+                showToolResult('rr-result', currentLang === 'ar' ? '⚠️ الرجاء إدخال قيم صحيحة' : '⚠️ Please enter valid values', 'var(--danger)');
+                return;
+            }
+            const riskPips = Math.abs(entry - sl) / 0.0001;
+            const rewardPips = Math.abs(tp - entry) / 0.0001;
+            const rrRatio = (rewardPips / riskPips).toFixed(2);
+            const profit = rewardPips * lot * 10;
+            const loss = riskPips * lot * 10;
+            let rating = parseFloat(rrRatio) >= 2 ? '⭐⭐⭐' : parseFloat(rrRatio) >= 1.5 ? '⭐⭐' : '⭐';
+            const text = currentLang === 'ar' ?
+                `⚖️ المخاطرة/العائد: <strong>1:${rrRatio}</strong> | الربح: <strong>$${formatCurrency(profit)}</strong> | الخسارة: <strong>$${formatCurrency(loss)}</strong> ${rating}` :
+                `⚖️ R/R: <strong>1:${rrRatio}</strong> | Profit: <strong>$${formatCurrency(profit)}</strong> | Loss: <strong>$${formatCurrency(loss)}</strong> ${rating}`;
+            showToolResult('rr-result', text, parseFloat(rrRatio) >= 2 ? 'var(--success)' : 'var(--warning)');
+            showToast(currentLang === 'ar' ? '📊 تم تحليل الصفقة' : '📊 Trade analyzed');
+        }
+
+        function calcPipValue() {
+            const pair = document.getElementById('pip-pair').value;
+            const lot = parseFloat(document.getElementById('pip-lot').value) || 0;
+            if (lot <= 0) {
+                showToolResult('pip-result', currentLang === 'ar' ? '⚠️ الرجاء إدخال حجم عقد صحيح' : '⚠️ Please enter valid lot', 'var(--danger)');
+                return;
+            }
+            const pipValues = { EURUSD:10, GBPUSD:10, USDJPY:9.2, AUDUSD:10, USDCAD:7.3, USDCHF:8.8, NZDUSD:10, EURGBP:12.5, GBPJPY:9.2, EURJPY:9.2 };
+            const base = pipValues[pair] || 10;
+            const pipValue = base * lot;
+            const text = currentLang === 'ar' ?
+                `💎 قيمة النقطة: <strong>$${formatCurrency(pipValue)}</strong> | 10 نقاط: <strong>$${formatCurrency(pipValue*10)}</strong> | 100 نقطة: <strong>$${formatCurrency(pipValue*100)}</strong>` :
+                `💎 Pip Value: <strong>$${formatCurrency(pipValue)}</strong> | 10 Pips: <strong>$${formatCurrency(pipValue*10)}</strong> | 100 Pips: <strong>$${formatCurrency(pipValue*100)}</strong>`;
+            showToolResult('pip-result', text);
+            showToast(currentLang === 'ar' ? '💡 قيمة النقطة جاهزة' : '💡 Pip value ready');
+        }
+
+        // init
+        initSettings();
+        updateTicker();
+    </script>
+</body>
+</html>
+
+في الاثنين، ٢٥ مايو ٢٠٢٦, ١:٠٧ ص Ahmed Haider <6611zzrra@gmail.com> كتب:
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRFX - Forex Trading | تداول الفوركس</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
             --bg2: #111111;
             --bg3: #1a1a1a;
             --card: #141414;

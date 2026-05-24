@@ -2,14 +2,30 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>موقع شركتي</title>
     <link rel="stylesheet" href="style.css">
+    <title>اسم شركتك | استشارات مالية</title>
 </head>
-<body>
+<body class="dark-mode">
+    <nav>
+        <div class="logo">اسم الشركة</div>
+        <div class="controls">
+            <button onclick="toggleTheme()">تبديل الوضع</button>
+            <button onclick="changeLang()">EN/AR</button>
+        </div>
+    </nav>
+
+    <!-- مكان التكر المباشر من TradingView -->
+    <div class="ticker-container">
+        <!-- هنا سنضع لاحقاً كود TradingView Widget -->
+        <p>شريط الأسعار سيظهر هنا</p>
+    </div>
+
     <header>
-        <h1>أهلاً بك في موقعنا</h1>
-        <p>تصميم هندسي احترافي</p>
+        <h1>نخبة الاستشارات المالية</h1>
+        <p>دقة في التحليل.. أمان في الاستثمار</p>
+        <a href="رابط_تليجرام" class="cta-button">انضم لقناة التوصيات</a>
     </header>
+
     <script src="script.js"></script>
 </body>
 </html>
